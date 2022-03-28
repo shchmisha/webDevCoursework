@@ -1,0 +1,7 @@
+1) make sure tetris can be paused/resumed
+
+2)makesure the score shows up an is saved to mysql
+    -> send post request from js to php
+        -> use cookies in order to store the information from th user in the browser
+        -> send post request to send the data
+    -> send a request to the same page with the 
