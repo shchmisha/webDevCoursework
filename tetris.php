@@ -34,10 +34,14 @@ if (isset($_REQUEST['score'])) {
         <meta charset="utf-8">
         <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        
+        <div>
+        <div class="topnav">
+            <a href="leaderboard.php">leaderboard</a>
+            <a class="active" href="logout.php">logout</a>
+        </div>
         
         <div>
             <button id="start-button">Start/Pause</button>
@@ -47,8 +51,7 @@ if (isset($_REQUEST['score'])) {
             height="600"
             ></canvas>
             <h2 id="scoreboard">Score: 0</h2>
-            <a href="logout.php">logout</a>
-            <a href="leaderboard.php">leaderboard</a>
+        </div>
         </div>
         
         <!-- <form action="routes.php" method="GET">
