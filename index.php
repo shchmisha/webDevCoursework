@@ -8,35 +8,35 @@ if(isset($_SESSION['user'])) {
 }
 
 if(isset($_REQUEST['login_btn'])) {
-	$email=filter_var(strtolower($_REQUEST['email']), FILTER_SANITIZE_EMAIL);
+	$username=filter_var($_REQUEST['UserName'], FILTER_UNSAFE_RAW);
 	$password=strip_tags($_REQUEST['password']);
 
-	if(empty($email)) {
-		$errorMsg[] = 'Email empty';
+	if(empty($username)) {
+		$errorMsg[] = 'Username empty';
 	}
 	else if (empty($password)) {
 		$errorMsg[] = 'Password empty';
 	}
 	else {
 		try{
-			$select_stmt = $db->prepare("SELECT * FROM users WHERE email=:email LIMIT 1");
+			$select_stmt = $db->prepare("SELECT * FROM users WHERE UserName=:username LIMIT 1");
 			$select_stmt->execute([
-				':email'=>$email
+				':username'=>$username
 			]);
 			$row = $select_stmt->fetch(PDO::FETCH_ASSOC);
 			if($select_stmt->rowCount()>0){
-				if(password_verify($password, $row["password"])) {
-					$_SESSION['user']['name'] = $row["name"];
-					$_SESSION['user']['email'] = $row["email"];
-					$_SESSION['user']['id'] = $row["id"];
+				if(password_verify($password, $row["Password"])) {
+					$_SESSION['user']['username'] = $row["UserName"];
+					$_SESSION['user']['id'] = $row["Display"];
+					// $_SESSION['user'][''] = $row["id"];
 					header("location: tetris.php");
 				}
 				else{
-					$errorMsg[] = 'Wrong email or password';
+					$errorMsg[] = 'Wrong username or password';
 				}
 			}
 			else{
-				$errorMsg[] = 'Wrong email or password';
+				$errorMsg[] = 'Wrong username or password';
 			}
 		}
 		catch(PDOException $e) {
@@ -69,10 +69,10 @@ if(isset($_REQUEST['login_btn'])) {
 			}
 		?>
 		<form action="index.php" method="post">
-      <div>
-          <label for="email">Email address</label>
-          <input type="email" name="email" placeholder="jane@doe.com">
-        </div>
+		<div>
+			<label for="UserName">UserName</label>
+			<input type="text" name="UserName">
+		</div>
         <div>
           <label for="password">Password</label>
           <input type="password" name="password" placeholder="">

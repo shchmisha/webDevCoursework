@@ -1,5 +1,6 @@
 // setup 
 const startBtn = document.getElementById('start-button')
+const restartBtn = document.getElementById('restart-button')
 let canvas = document.getElementById("game-canvas") 
 
 let scoreboard = document.getElementById("scoreboard") 
@@ -89,11 +90,19 @@ startBtn.addEventListener('click', () => {
     } else {
       timerId = setInterval(() => newGameState(), GAME_CLOCK); 
     }
-  })
+  }) 
 
-$(document).ready(function () {
-    createCookie("gfg", "GeeksforGeeks", "10");
-});
+// find out how game is restarted and create a function for it
+
+
+restartBtn.addEventListener('click', () => {
+    document.location.href="tetris.php"
+
+})
+
+// $(document).ready(function () {
+//     createCookie("gfg", "GeeksforGeeks", "10");
+// });
    
 // Function to create the cookie
 // function createCookie(name, value, days) {

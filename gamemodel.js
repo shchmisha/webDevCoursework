@@ -5,6 +5,12 @@ class GameModel {
         this.grid = this.makeStartingGrid()
     }
 
+    // restart() {
+    //     this.fallingPiece = null
+    //     this.grid = this.makeStartingGrid()
+    //     this.renderGameState()
+    // }
+
     makeStartingGrid() {
         let grid = [] 
         for (var i = 0; i < ROWS; i++) {
@@ -42,7 +48,7 @@ class GameModel {
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid[i].length; j++) {
                 let cell = this.grid[i][j] 
-                this.ctx.fillStyle = COLORS[cell] 
+                this.ctx.fillStyle = COLORS[cell]
                 this.ctx.fillRect(j, i, 1, 1)
             }
         }
@@ -74,9 +80,10 @@ class GameModel {
             // check game over 
             if (this.fallingPiece.y === 0) {
 
-                
                 this.grid = this.makeStartingGrid()
-                window.location.href="tetris.php?score="+window.score
+                // document.location.href="tetris.php?score="+window.score
+                this.sendScore(window.score)
+                document.location.href="tetris.php"
             }
             this.fallingPiece = null
         } else {
@@ -123,5 +130,18 @@ class GameModel {
             }
         }
         this.renderGameState()
+    }
+
+    sendScore(curScore) {
+        let data = {score: curScore};
+
+        fetch("http://localhost:8000/project/tetris.php", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(data)
+        })
+        // .then(res => {
+        // console.log("Request complete! response:", res);
+        // });
     }
 }
