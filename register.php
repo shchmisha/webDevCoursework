@@ -64,13 +64,6 @@ if(isset($_REQUEST['register_btn'])){
 						]
 						)
 				) {
-					$create_stmt = $db->prepare("INSERT INTO scores (Scoreid,Username,Score) VALUES (:scoreid,:username,:score)");
-					$create_stmt->execute([
-						':scoreid'=>rand(0,100000000),
-						':username'=>$username,
-						':score'=>0
-					]); 
-
 					header("location: index.php");
 				}
 				

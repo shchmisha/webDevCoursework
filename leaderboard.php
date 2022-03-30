@@ -1,9 +1,10 @@
 <?php
 require_once 'connection.php';
 
-if(!isset($_SESSION['user'])){
-	header("location: index.php");
-}
+
+// if(!isset($_SESSION['user'])){
+// 	header("location: index.php");
+// }
 
 
 $scores = array();
