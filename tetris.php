@@ -6,75 +6,40 @@ if(!isset($_SESSION['user'])){
 	header("location: index.php");
 }
 
-if(isset($_POST)) {
-    $select_stmt = $db->prepare("SELECT * FROM scores WHERE Username=:username ORDER BY Score DESC");
-    $select_stmt->execute([
-        ':username'=>$_SESSION['user']['username']
-    ]);
-    $rows = $select_stmt->fetchAll();
+if(isset($_POST['score'])) {
 
-    foreach($rows as $row) {
-        if ($row['Score'] != $_POST['score']) {
-            $create_stmt = $db->prepare("INSERT INTO scores (Scoreid,Username,Score) VALUES (:scoreid,:username,:score)");
-            $create_stmt->execute([
-                ':scoreid'=>rand(0,100000000),
-                ':username'=>$_SESSION['user']['username'],
-                ':score'=>$_POST['score']
-            ]);
-        }
-    }
-    // deliver_response(200, "success", $_POST);
-    echo $_POST['score'];
+    $create_stmt = $db->prepare("INSERT INTO scores (Scoreid,Username,Score) VALUES (:scoreid,:username,:score)");
+    $create_stmt->execute([
+        ':scoreid'=>rand(0,100000000),
+        ':username'=>$_SESSION['user']['username'],
+        ':score'=>$_POST['score']
+    ]); 
 }
-
-// function deliver_response($status, $status_message, $data) {
-//  header("HTTP/1.1 $status $status_message");
-//  $response['status'] = $status;
-//  $response['status_message'] = $status_message;
-//  $response['data'] = $data;
-
-// $json_response = json_encode($response);
-//  echo $json_response;
-// }
-
-// if (isset($_REQUEST['score'])) {
-
-//     $select_stmt = $db->prepare("SELECT * FROM scores WHERE Username=:username ORDER BY Score DESC");
-//     $select_stmt->execute([
-//         ':username'=>$_SESSION['user']['username']
-//     ]);
-//     $rows = $select_stmt->fetchAll();
-
-//     foreach($rows as $row) {
-//         if ($row['Score'] != $_REQUEST['score']) {
-//             $create_stmt = $db->prepare("INSERT INTO scores (Scoreid,Username,Score) VALUES (:scoreid,:username,:score)");
-//             $create_stmt->execute([
-//                 ':scoreid'=>rand(0,100000000),
-//                 ':username'=>$_SESSION['user']['username'],
-//                 ':score'=>$_REQUEST['score']
-//             ]);
-//         }
-//     }
-
-    
-// }
 
 
 ?>
 
 <html>
+
+    <h1>Play Tetris</h1>
+
+    <ul>
+        <li><a href="leaderboard.php">leaderboard</a></li>
+        <li><a href="logout.php">logout</a></li>
+    </ul>
+
+    <br>
+    <br>
+
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>Play Tetris</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body class="canvas">
         <div>
-        <div class="topnav">
-            <a href="leaderboard.php">leaderboard</a>
-            <a class="active" href="logout.php">logout</a>
-        </div>
+        
 
         <?php
         if (isset($_REQUEST['score'])) {
@@ -109,14 +74,6 @@ if(isset($_POST)) {
                 
         </div>
         
-        <!-- <form action="routes.php" method="GET">
-            <input type="text" name="Name">
-            <input type="submit" value="send">
-        </form> -->
-        <!-- <script>
-            var src="routes.php?id=5";
-            window.location.href=src;
-        </script> -->
         <script type="text/javascript" src="constants.js"></script>
         <script type="text/javascript" src="piece.js"></script>
         <script type="text/javascript" src="gamemodel.js"></script>

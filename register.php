@@ -64,6 +64,13 @@ if(isset($_REQUEST['register_btn'])){
 						]
 						)
 				) {
+					$create_stmt = $db->prepare("INSERT INTO scores (Scoreid,Username,Score) VALUES (:scoreid,:username,:score)");
+					$create_stmt->execute([
+						':scoreid'=>rand(0,100000000),
+						':username'=>$username,
+						':score'=>0
+					]); 
+
 					header("location: index.php");
 				}
 				
@@ -80,16 +87,27 @@ if(isset($_REQUEST['register_btn'])){
 
 <html lang="en">
 
+<ul>
+	<li><a href="tetris.php">Play Tetris</a></li>
+	<li><a href="leaderboard.php">Leaderboard</a></li>
+	</ul>
+	<br>
+	<br>
+	<br>
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Register</title>
+	<link rel="stylesheet" href=styles.css>
 </head>
 <body>
-	<div>
+	
+	<div class="regform">
 		
 		<form action="register.php" method="post">
+			
 			<div>
 
 				<?php

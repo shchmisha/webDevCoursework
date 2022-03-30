@@ -50,11 +50,27 @@ if(isset($_REQUEST['login_btn'])) {
 
 <html lang="en">
 
+<h1>Login</h1>
+
+<body>
+<ul>
+  <li><a href="tetris.php">Play Tetris</a></li>
+  <li><a href="leaderboard.php">Leaderboard</a></li>
+  
+
+
+
+</ul>
+
+<br>
+<br>
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login</title>
+	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 	<div>
@@ -68,7 +84,7 @@ if(isset($_REQUEST['login_btn'])) {
 				} 
 			}
 		?>
-		<form action="index.php" method="post">
+		<form align="center" action="index.php" method="post">
 		<div>
 			<label for="UserName">UserName</label>
 			<input type="text" name="UserName">

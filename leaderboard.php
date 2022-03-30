@@ -1,10 +1,30 @@
 <?php
 require_once 'connection.php';
 
-$select_stmt = $db->prepare("SELECT name,highscore FROM users");
-$select_stmt->execute();
-$rows = $select_stmt->fetchAll();
+$scores = array();
 
+$select_users_stmt = $db->prepare("SELECT * FROM users");
+$select_users_stmt->execute();
+$users = $select_users_stmt->fetchAll();
+
+foreach($users as $user) {
+    $select_score_stmt = $db->prepare("SELECT * FROM scores WHERE Username=:username ORDER BY Score DESC");
+    $select_score_stmt->execute([
+        ':username'=>$user['UserName']
+    ]);
+    $rows = $select_score_stmt->fetchAll();
+    $scores[] = $rows[0];
+}
+
+for ($i=0;$i<count($scores)-1;$i++) {
+    for ($j=0;$j<count($scores)-$i-1;$j++) {
+        if($scores[$j]['Score']<$scores[$j+1]['Score']) {
+            $temp = $scores[$j];
+            $scores[$j] = $scores[$j+1];
+            $scores[$j+1] = $temp;
+        }
+    }
+}
 
 ?>
 
@@ -17,14 +37,25 @@ $rows = $select_stmt->fetchAll();
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <div class="topnav">
-            <a href="tetris.php">play</a>
-            <a class="active" href="logout.php">logout</a>
-        </div>
+    <h1>Leaderboard</h1>
+
+<ul>
+  <li><a href="tetris.php">Play Tetris</a></li>
+  <li><a href="logout.php">Logout</a></li>
+
+
+</ul>
+
+<br>
+<br>
+        <table border cellspacing=2 cellpadding=20>
+        <tr><th>Username</th><th>Score</th>
         <?php
-            foreach($rows as $row) {
-                echo "<p>".$row['name']."-".$row['highscore']."</p>";
+            foreach($scores as $score) {
+                echo "<tr><td>".$score['Username']."</td><td>".$score['Score']."</td></tr>";
+                
             }
+            // echo $users
         ?>
         
     </body>

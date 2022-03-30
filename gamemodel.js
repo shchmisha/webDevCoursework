@@ -83,7 +83,7 @@ class GameModel {
                 this.grid = this.makeStartingGrid()
                 // document.location.href="tetris.php?score="+window.score
                 this.sendScore(window.score)
-                document.location.href="tetris.php"
+                document.location.href="tetris.php";
             }
             this.fallingPiece = null
         } else {
@@ -133,15 +133,15 @@ class GameModel {
     }
 
     sendScore(curScore) {
-        let data = {score: curScore};
+        
+        const xhr = new XMLHttpRequest()
 
-        fetch("http://localhost:8000/project/tetris.php", {
-        method: "POST",
-        headers: {'Content-Type': 'application/json'}, 
-        body: JSON.stringify(data)
-        })
-        // .then(res => {
-        // console.log("Request complete! response:", res);
-        // });
+        xhr.onload = function () {
+            console.log(this.responseText)
+        }
+
+        xhr.open("POST", "tetris.php")
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+        xhr.send("score="+curScore)
     }
 }
