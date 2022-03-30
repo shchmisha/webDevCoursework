@@ -1,6 +1,11 @@
 <?php
 require_once 'connection.php';
 
+if(!isset($_SESSION['user'])){
+	header("location: index.php");
+}
+
+
 $scores = array();
 
 $select_users_stmt = $db->prepare("SELECT * FROM users");
