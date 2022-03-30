@@ -19,7 +19,10 @@ foreach($users as $user) {
         ':username'=>$user['UserName']
     ]);
     $rows = $select_score_stmt->fetchAll();
-    $scores[] = $rows[0];
+    if ($rows[0]!=null) {
+        $scores[] = $rows[0];
+    }
+    
 }
 
 for ($i=0;$i<count($scores)-1;$i++) {

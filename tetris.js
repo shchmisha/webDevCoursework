@@ -6,9 +6,7 @@ let canvas = document.getElementById("game-canvas")
 let scoreboard = document.getElementById("scoreboard") 
 let ctx = canvas.getContext("2d") 
 
-
-ctx.scale(BLOCK_SIDE_LENGTH, BLOCK_SIDE_LENGTH) 
-// ctx.drawImage("./tetris-grid-bg.jpg",0,0);
+ctx.scale(BLOCK_SIDE_LENGTH, BLOCK_SIDE_LENGTH)
 
 let model = new GameModel(ctx)
 
@@ -43,7 +41,7 @@ const fullSend = () => {
 
     for (let i = 0; i < model.grid.length; i++) {
         if (allFilled(model.grid[i])) {
-            window.score += SCORE_WORTH 
+            // window.score += 1  
             model.grid.splice(i, 1) 
             model.grid.unshift([0,0,0,0,0,0,0,0,0,0])
         }
@@ -99,24 +97,3 @@ restartBtn.addEventListener('click', () => {
     document.location.href="tetris.php"
 
 })
-
-// $(document).ready(function () {
-//     createCookie("gfg", "GeeksforGeeks", "10");
-// });
-   
-// Function to create the cookie
-// function createCookie(name, value, days) {
-//     var expires;
-      
-//     if (days) {
-//         var date = new Date();
-//         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-//         expires = "; expires=" + date.toGMTString();
-//     }
-//     else {
-//         expires = "";
-//     }
-      
-//     document.cookie = escape(name) + "=" + 
-//         escape(value) + expires + "; path=/";
-// }

@@ -4,7 +4,14 @@ h1{
 }
 h2{
   text-align: center;
-  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  /* background-color: yellow; */
+  /* border-color: yellow; */
+  /* width: 100%; */
+  /* width: auto;
+  padding: 20px 40px;
+  margin: 10px 5px; */
 }
 
 body{
@@ -12,7 +19,7 @@ body{
  
   background-size: cover;
   background-color: white;
-  
+  text-align: center;
 }
 
 ul {
@@ -84,7 +91,30 @@ margin: 10px 5px;
   
 
    
-}  
+}
+
+/*  */
+.img{
+  position:absolute;
+  z-index:1;
+  background-color: white;
+}
+
+.canvasContainer{
+    display:inline-block;
+    width:300px; 
+    height:600px;
+    margin: 0 auto; 
+    position:relative; 
+    border-style: solid;
+    border-width: 5px;
+}
+
+#game-canvas{
+    position:relative;
+    z-index:20;
+}
+/*  */
 
 label{
   color: #fff;

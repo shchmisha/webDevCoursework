@@ -58,12 +58,12 @@ if(isset($_POST['score'])) {
             <div>
                 <h2 id="scoreboard">Score: 0</h2>
             </div>
-
-            <div>
+            <div class="canvasContainer">
+                <img class='img' src="tetris-grid-bg.png" alt="" />
                 <canvas
-                id = "game-canvas"
-                width="300" 
-                height="600"
+                    id = "game-canvas"
+                    width="300" 
+                    height="600"
                 ></canvas>
             </div>
             

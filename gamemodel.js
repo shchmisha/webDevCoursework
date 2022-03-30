@@ -45,23 +45,30 @@ class GameModel {
     }
 
     renderGameState() {
+        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid[i].length; j++) {
                 let cell = this.grid[i][j] 
-                this.ctx.fillStyle = COLORS[cell]
-                this.ctx.fillRect(j, i, 1, 1)
+                if(cell!==0) {
+                    this.ctx.fillStyle = COLORS[cell]
+                    this.ctx.fillRect(j, i, 1, 1)
+                }
+                
+                // this.ctx.strokeStyle = '#FFFFFF'
+                // this.ctx.strokeRect(j, i, 0.9, 0.9);
             }
         }
 
         if (this.fallingPiece !== null) {
             this.fallingPiece.renderPiece()
-        }
+            
+        } 
     }
 
 
     moveDown() {
         if (this.fallingPiece === null) {
-            this.renderGameState() 
+            this.renderGameState()
             return
         } else if (this.collision(this.fallingPiece.x, this.fallingPiece.y + 1)) {
             const shape = this.fallingPiece.shape 
@@ -76,6 +83,7 @@ class GameModel {
                     }
                 })
             })
+            window.score += 1
 
             // check game over 
             if (this.fallingPiece.y === 0) {
