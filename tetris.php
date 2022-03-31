@@ -70,8 +70,8 @@ if(isset($_POST['score'])) {
             </div>
             
             <div>
-                <button id="restart-button">Restart</button>
-                <button id="start-button">Start/Pause</button>
+                <!-- <button id="restart-button">Restart</button> -->
+                <button id="start-button">Start</button>
             </div>
                 
         </div>

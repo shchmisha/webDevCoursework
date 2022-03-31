@@ -52,9 +52,10 @@ if(isset($_REQUEST['login_btn'])) {
 
 <body>
 <ul>
+	<li><a href="index.php">Home</a></li>
   <li><a href="tetris.php">Play Tetris</a></li>
   <li><a href="leaderboard.php">Leaderboard</a></li>
-  <li><a href="index.php">Home</a></li>
+  <li><a href="logout.php">Logout</a></li>
 
 
 
@@ -110,3 +111,5 @@ if(isset($_REQUEST['login_btn'])) {
 	
 </body>
 </html>
+
+ 

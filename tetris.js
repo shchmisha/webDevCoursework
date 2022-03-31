@@ -88,6 +88,7 @@ startBtn.addEventListener('click', () => {
     } else {
       timerId = setInterval(() => newGameState(), GAME_CLOCK); 
     }
+    startBtn.style.visibility='hidden'
   }) 
 
 // find out how game is restarted and create a function for it
