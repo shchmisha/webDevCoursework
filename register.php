@@ -18,6 +18,10 @@ if(isset($_REQUEST['register_btn'])){
 	$lastname=filter_var($_REQUEST['LastName'], FILTER_UNSAFE_RAW);
 	$password=strip_tags($_REQUEST['password']);
 	$repeat_password=strip_tags($_REQUEST['repeat_password']);
+	$display = 0;
+	if (isset($_REQUEST['display'])) {
+		$display = 1;
+	}
 
 	if(empty($username)){
 		$errorMsg[0][] = 'Username required';
@@ -49,7 +53,6 @@ if(isset($_REQUEST['register_btn'])){
 				 $errorMsg[0][] = "Username already exists";
 			} else{
 				$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-				$display = rand(0,10000);
 				$sql = "INSERT INTO users (UserName,FirstName,LastName,Password,Display) VALUES (:username,:firstname,:lastname,:password,:display)";
 				$insert_stmt = $db->prepare($sql);
 			
@@ -173,6 +176,10 @@ if(isset($_REQUEST['register_btn'])){
 				<input type="password" name="repeat_password" placeholder="">
 				
 			</div>
+
+			<label for="display">Display scores?</label>
+			<input type="checkbox" name="display">
+  			
 			<button type="submit" name="register_btn" >Register Account</button>
 		</form>
 		Already Have an Account? <a href="index.php">Login Instead</a>

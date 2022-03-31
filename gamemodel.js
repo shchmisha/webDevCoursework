@@ -52,10 +52,9 @@ class GameModel {
                 if(cell!==0) {
                     this.ctx.fillStyle = COLORS[cell]
                     this.ctx.fillRect(j, i, 1, 1)
+                    
                 }
-                
-                // this.ctx.strokeStyle = '#FFFFFF'
-                // this.ctx.strokeRect(j, i, 0.9, 0.9);
+
             }
         }
 
@@ -83,7 +82,7 @@ class GameModel {
                     }
                 })
             })
-            window.score += 1
+            window.score += 10
 
             // check game over 
             if (this.fallingPiece.y === 0) {

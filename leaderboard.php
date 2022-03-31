@@ -14,15 +14,16 @@ $select_users_stmt->execute();
 $users = $select_users_stmt->fetchAll();
 
 foreach($users as $user) {
-    $select_score_stmt = $db->prepare("SELECT * FROM scores WHERE Username=:username ORDER BY Score DESC");
-    $select_score_stmt->execute([
-        ':username'=>$user['UserName']
-    ]);
-    $rows = $select_score_stmt->fetchAll();
-    if ($rows[0]!=null) {
-        $scores[] = $rows[0];
+    if($user['Display'] == 1) {
+        $select_score_stmt = $db->prepare("SELECT * FROM scores WHERE Username=:username ORDER BY Score DESC");
+        $select_score_stmt->execute([
+            ':username'=>$user['UserName']
+        ]);
+        $rows = $select_score_stmt->fetchAll();
+        if ($rows[0]!=null) {
+            $scores[] = $rows[0];
+        }
     }
-    
 }
 
 for ($i=0;$i<count($scores)-1;$i++) {
@@ -49,6 +50,7 @@ for ($i=0;$i<count($scores)-1;$i++) {
     <h1>Leaderboard</h1>
 
 <ul>
+<li><a href="index.php">Home</a></li>
   <li><a href="tetris.php">Play Tetris</a></li>
   <li><a href="logout.php">Logout</a></li>
 

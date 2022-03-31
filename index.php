@@ -3,9 +3,7 @@ require_once 'connection.php';
 
 session_start();
 
-if(isset($_SESSION['user'])) {
-	header("location: tetris.php");
-}
+
 
 if(isset($_REQUEST['login_btn'])) {
 	$username=filter_var($_REQUEST['UserName'], FILTER_UNSAFE_RAW);
@@ -56,7 +54,7 @@ if(isset($_REQUEST['login_btn'])) {
 <ul>
   <li><a href="tetris.php">Play Tetris</a></li>
   <li><a href="leaderboard.php">Leaderboard</a></li>
-  
+  <li><a href="index.php">Home</a></li>
 
 
 
@@ -73,8 +71,7 @@ if(isset($_REQUEST['login_btn'])) {
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<div>
-		<?php
+	<?php
 			if(isset($_REQUEST['msg'])){
 				echo "<p class='alert alert-warning'>".$_REQUEST['msg']."</p>";
 			}
@@ -84,18 +81,32 @@ if(isset($_REQUEST['login_btn'])) {
 				} 
 			}
 		?>
-		<form align="center" action="index.php" method="post">
-		<div>
-			<label for="UserName">UserName</label>
-			<input type="text" name="UserName">
-		</div>
-        <div>
-          <label for="password">Password</label>
-          <input type="password" name="password" placeholder="">
-        </div>
-			<button type="submit" name="login_btn">Login</button>
-		</form>
-    No Account? <a href="register.php">Register Instead</a>
-	</div>
+	<?php
+		if(!isset($_SESSION['user'])) {
+			echo '<div>
+					<form align="center" action="index.php" method="post">
+					<div>
+						<label for="UserName">UserName</label>
+						<input type="text" name="UserName">
+					</div>
+					<div>
+					<label for="password">Password</label>
+					<input type="password" name="password" placeholder="">
+					</div>
+						<button type="submit" name="login_btn">Login</button>
+					</form>
+					No Account? <a href="register.php">Register Instead</a>
+				</div>
+				';
+		} else {
+			echo '
+				<br>
+				<br>
+				<h2>Welcome To Tetris!</h2>
+				<a href="tetris.php">Click to play</a>
+			';
+		}
+	?>
+	
 </body>
 </html>
