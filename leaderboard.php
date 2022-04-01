@@ -9,13 +9,13 @@ require_once 'connection.php';
 
 $scores = array();
 
-$select_users_stmt = $db->prepare("SELECT * FROM users");
+$select_users_stmt = $db->prepare("SELECT * FROM Users");
 $select_users_stmt->execute();
 $users = $select_users_stmt->fetchAll();
 
 foreach($users as $user) {
     if($user['Display'] == 1) {
-        $select_score_stmt = $db->prepare("SELECT * FROM scores WHERE Username=:username ORDER BY Score DESC");
+        $select_score_stmt = $db->prepare("SELECT * FROM Scores WHERE Username=:username ORDER BY Score DESC");
         $select_score_stmt->execute([
             ':username'=>$user['UserName']
         ]);

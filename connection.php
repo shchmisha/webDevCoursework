@@ -1,8 +1,8 @@
 <?php
 
 $db_host = "localhost";
-$db_user = "newuser";
-$db_password = "";
+$db_user = "root";
+$db_password = "123456";
 $db_name = "tetris";
 
 $db = new PDO("mysql:host={$db_host};dbname={$db_name}", $db_user, $db_password);

@@ -6,7 +6,7 @@ session_start();
 $_SESSION;
 
 if(isset($_SESSION['user'])){
-	header("location: welcome.php");
+	header("location: index.php");
 }
 
 if(isset($_REQUEST['register_btn'])){
@@ -45,7 +45,7 @@ if(isset($_REQUEST['register_btn'])){
 		try{
 			// $create_stmt = $db->prepare("CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT NOT NULL,name varchar(50) NOT NULL, email varchar(100) NOT NULL, password char(100) NOT NULL, created DATATIME NOT NULL)");
 			// $create_stmt->execute();
-			$select_stmt = $db->prepare("SELECT UserName FROM users WHERE UserName=:username");
+			$select_stmt = $db->prepare("SELECT UserName FROM Users WHERE UserName=:username");
 			$select_stmt->execute([':username' => $username]);
 			$row=$select_stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -53,7 +53,7 @@ if(isset($_REQUEST['register_btn'])){
 				 $errorMsg[0][] = "Username already exists";
 			} else{
 				$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-				$sql = "INSERT INTO users (UserName,FirstName,LastName,Password,Display) VALUES (:username,:firstname,:lastname,:password,:display)";
+				$sql = "INSERT INTO Users (UserName,FirstName,LastName,Password,Display) VALUES (:username,:firstname,:lastname,:password,:display)";
 				$insert_stmt = $db->prepare($sql);
 			
 				if (

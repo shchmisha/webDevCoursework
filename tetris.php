@@ -8,7 +8,7 @@ if(!isset($_SESSION['user'])){
 
 if(isset($_POST['score'])) {
 
-    $create_stmt = $db->prepare("INSERT INTO scores (Scoreid,Username,Score) VALUES (:scoreid,:username,:score)");
+    $create_stmt = $db->prepare("INSERT INTO Scores (Scoreid,Username,Score) VALUES (:scoreid,:username,:score)");
     $create_stmt->execute([
         ':scoreid'=>rand(0,100000000),
         ':username'=>$_SESSION['user']['username'],

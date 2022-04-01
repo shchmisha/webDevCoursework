@@ -17,7 +17,7 @@ if(isset($_REQUEST['login_btn'])) {
 	}
 	else {
 		try{
-			$select_stmt = $db->prepare("SELECT * FROM users WHERE UserName=:username LIMIT 1");
+			$select_stmt = $db->prepare("SELECT * FROM Users WHERE UserName=:username LIMIT 1");
 			$select_stmt->execute([
 				':username'=>$username
 			]);
@@ -85,7 +85,7 @@ if(isset($_REQUEST['login_btn'])) {
 	<?php
 		if(!isset($_SESSION['user'])) {
 			echo '<div>
-					<form align="center" action="index.php" method="post">
+					<form class="regform" align="center" action="index.php" method="post">
 					<div>
 						<label for="UserName">UserName</label>
 						<input type="text" name="UserName">
